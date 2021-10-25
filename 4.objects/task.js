@@ -18,19 +18,15 @@ this.marks.push(mark);
 
 Student.prototype.addMarks = function (...mark) {
   if (this.marks === undefined) {
- this.marks = [mark];
- } else {
- this.marks.push(mark);
- }
- }
-
-Student.prototype.getAverage = function (mark) {
-  let sum = 0;
-  for (let i = 0; i < this.marks.length; i += 1) {
-    sum = sum + this.marks[i];
-  }
-  return avg = sum / this.marks.length;
+this.marks = mark;
+} else {
+this.marks.push(...mark);
 }
+}
+
+ Student.prototype.getAverage = function () {
+  return (this.marks.reduce((acc, item) => acc += item)) / this.marks.length;
+  }
   
 Student.prototype.exclude = function (reason) {
   delete this.subject;
