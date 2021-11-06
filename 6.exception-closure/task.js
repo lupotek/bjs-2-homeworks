@@ -1,15 +1,15 @@
 const x = +prompt ("введите цифру")
 
 function parseCount(x) {
-  if (isNaN (Number.parseInt( x )) === true) {
+  let parsing = Number.parseInt( x );
+  if (isNaN (parsing)) {
     throw new Error ("Невалидное значение");
   } 
-  return Number.parseInt( x );
+  return parsing;
   } 
 
 function validateCount(x) {
      try {
-      parseCount(x);
       return parseCount(x);
     } catch(err) {
       return err
@@ -41,9 +41,9 @@ function validateCount(x) {
     try {
       return new Triangle (a, b, c);
     } catch (err) {
-      return {getPerimeter: "Ошибка! Треугольник не существует", getArea: "Ошибка! Треугольник не существует"}
-    }
+      return {getPerimeter = () => “Ошибка! Треугольник не существует”, getArea = () => “Ошибка! Треугольник не существует”}
   }
+}
 
 
 
