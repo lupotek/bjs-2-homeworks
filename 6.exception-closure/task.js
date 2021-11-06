@@ -35,12 +35,13 @@ class Triangle {
   }
 }
 
-function getTriangle () {
-    try {
-      return new Triangle (a, b, c); 
-  } catch (err) {
-    return {getPerimeter: () => 'Ошибка! Треугольник не существует!', getArea: () => 'Ошибка! Треугольник не существует!'}
-  }
+function getTriangle (a, b, c) {
+  try {
+    return new Triangle (a, b, c); 
+} catch (err) {
+  return {getPerimeter: () => 'Ошибка! Треугольник не существует', getArea: () => 'Ошибка! Треугольник не существует'}
 }
+}
+
 
   
