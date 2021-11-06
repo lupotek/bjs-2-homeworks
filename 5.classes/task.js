@@ -75,13 +75,21 @@ class PrintEditionItem {
         }
       }
       
-    findBookBy(type, value) {
-      for (let i = 0; i < this.books.length; i+=1) {
-        if (this.books[i][type] === value) {
-          return this.books[i]
+      findBookBy (type, value) {
+        let searchingBook = this.books.find(book => book[type] === value);
+        if (searchingBook !== undefined) {
+          return searchingBook
         } else {
           return null
-          }
         }
-      }
-    } 
+       }
+     
+       giveBookByName(bookName) {
+         let searchName = this.books.findIndex(book => book.name === bookName);
+         if (searchName !== undefined) {
+           return this.books.splice(searchName, 1)
+         } else {
+           return null
+         }
+       }
+     }
