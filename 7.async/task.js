@@ -25,4 +25,23 @@ class AlarmClock {
               return false
         }
     }
+
+    getCurrentFormattedTime () {
+      let currentDate = new Date()
+      return String(currentDate.getHours())+":"+String(currentDate.getMinutes())
+    }
+
+    start () {
+      
+      if (this.timerId === null) {
+        let timerId = setInterval ((function () {
+          this.alarmCollection.forEach (function(alarm) {
+            if (alarm.time === this.getCurrentFormattedTime ()){
+              return alarm.callback
+              }
+          })
+        }), 2000) 
+      }
+    }
+  }
 }
