@@ -87,7 +87,7 @@ class PrintEditionItem {
        giveBookByName(bookName) {
          let searchName = this.books.findIndex(book => book.name === bookName);
          if (searchName !== undefined) {
-           return this.books.splice(searchName, 1)
+           return this.books.splice(searchName, 1)[0]
          } else {
            return null
          }
