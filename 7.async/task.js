@@ -27,21 +27,35 @@ class AlarmClock {
     }
 
     getCurrentFormattedTime () {
-      let currentDate = new Date()
-      return String(currentDate.getHours())+":"+String(currentDate.getMinutes())
+      return new Date().toLocaleTimeString("ru-Ru", {
+      hour: "2-digit",
+      minute: "2-digit",});
     }
-
+    
     start () {
-      
       if (this.timerId === null) {
-        let timerId = setInterval ((function () {
-          this.alarmCollection.forEach (function(alarm) {
-            if (alarm.time === this.getCurrentFormattedTime ()){
-              return alarm.callback
-              }
-          })
-        }), 2000) 
+      this.timerId = setInterval ((() => this.alarmCollection.forEach (alarm => {
+        if (alarm.time === this.getCurrentFormattedTime ()) {
+          return alarm.callback
+        }   
+        })), 2000) 
       }
     }
+
+    stop () {
+      if (this.timerId !== null) {
+        clearInterval(this.timerId)
+        this.timerId = null
+      }
   }
+  
+    printAlarms () {
+      this.alarmCollection.forEach(alarm => console.log("Будильник номер " + alarm.id + ". Время: " + alarm.time))
+    }
+  
+    clearAlarms () {
+      this.stop()
+      this.alarmCollection = []
+    }
 }
+
