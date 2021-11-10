@@ -11,7 +11,7 @@ function cachingDecoratorNew (func) {
       }
 
       let result = func(...args);
-      cache.push({hash: hash, value: result});
+      cache.push({hash, value: result});
       
       if (cache.length > 5) {
         cache.shift();
@@ -27,16 +27,19 @@ function cachingDecoratorNew (func) {
 const sendSignal = () => console.log("Сигнал отправлен");
 
 function debounceDecoratorNew(f, ms) {
+  let timeout
   let flag = false;
 
   return function (...args) {
-    if (!flag) {
-      f.apply (this, args);
-      flag = true
-      } else {
-      setTimeout(() =>
-        flag = false, ms); 
-    }
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      f.apply(this.args)
+      }, ms)
+
+      if (!flag) {
+        f.apply(this.args)
+        flag = true
+      }
   }
 }
 
