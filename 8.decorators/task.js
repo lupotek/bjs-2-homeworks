@@ -24,8 +24,6 @@ function cachingDecoratorNew (func) {
 }
 
 
-const sendSignal = () => console.log("Сигнал отправлен");
-
 function debounceDecoratorNew(f, ms) {
   let timeout
   let flag = false;
