@@ -41,6 +41,22 @@ function debounceDecoratorNew(f, ms) {
   }
 }
 
-function debounceDecorator2(func) {
-  // Ваш код
+function debounceDecorator2(f, ms) {
+  let timeout
+  let flag = false;
+  
+  function wrapper (...args) {
+    wrapper.count.push(args)
+    clearTimeout (timeout)
+    timeout = setTimeout(() => {
+      f.apply(this.args)
+      }, ms)
+      
+      if (!flag) {
+        f.apply(this.args);
+        flag = true
+      }  
+  }
+  wrapper.count = [];
+  return wrapper 
 }
