@@ -45,25 +45,19 @@ function debounceDecoratorNew(f, ms) {
 function debounceDecorator2(f, ms) {
   let timeout
   let flag = false;
-  f.count = counter(f)
-  
+
   function wrapper (...args) {
     clearTimeout (timeout)
-      timeout = setTimeout(() => {
-        f.apply(this.args)
-        }, ms)
-  
+    timeout = setTimeout(() => {
+      f.apply(this.args)
+      }, ms)
+      f.count++
+
       if (!flag) {
         f.apply(this.args);
-        flag = true
-      }
+        flag = true 
+      } 
   }
+  f.count = 0;
   return wrapper
-
-  function counter(f, calls = 1) {
-    return function () {
-      f.apply(null, args);
-      return calls++;
-    }
-  }
 }
