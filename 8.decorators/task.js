@@ -42,24 +42,28 @@ function debounceDecoratorNew(f, ms) {
 }
 
 
-  function debounceDecorator2(f, ms) {
-    let timeout
-    let flag = false;
-    let call = 0
-    
-    function wrapper (...args) {
+function debounceDecorator2(f, ms) {
+  let timeout
+  let flag = false;
+  f.count = counter(f)
   
-      clearTimeout (timeout)
+  function wrapper (...args) {
+    clearTimeout (timeout)
       timeout = setTimeout(() => {
         f.apply(this.args)
         }, ms)
-    
-        if (!flag) {
-          f.apply(this.args);
-          flag = true
-        }
-    }
-    f.count = []
-    f.count.push(call)
-    return wrapper
+  
+      if (!flag) {
+        f.apply(this.args);
+        flag = true
+      }
   }
+  return wrapper
+
+  function counter(f, calls = 1) {
+    return function () {
+      f.apply(null, args);
+      return calls++;
+    }
+  }
+}
