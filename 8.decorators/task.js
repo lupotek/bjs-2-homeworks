@@ -49,15 +49,17 @@ function debounceDecorator2(f, ms) {
   function wrapper (...args) {
     clearTimeout (timeout)
     timeout = setTimeout(() => {
+      wrapper.count++
       f.apply(this.args)
       }, ms)
       f.count++
 
       if (!flag) {
+        wrapper.count++
         f.apply(this.args);
         flag = true 
       } 
   }
-  f.count = 0;
+  wrapper.count = 0;
   return wrapper
 }
